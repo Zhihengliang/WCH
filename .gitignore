@@ -1,6 +1,3 @@
-#
-MASTER/obj
-SLAVE/obj
 # Prerequisites
 *.d
 

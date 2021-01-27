@@ -84,8 +84,8 @@ void get_slave_data(uint8 data)
 //-------------------------------------------------------------------------------------------------------------------
 void data_analysis(uint8 *line)
 {
-    if(line[1] == 0xB0)    slave_encoder_left  = ((int16)line[2] << 8) | line[3];
-    if(line[4] == 0xB1)    slave_encoder_right = ((int16)line[5] << 8) | line[6];
+    if(line[1] == 0xB0)     Right_rear_speed = ((int16)line[2] << 8) | line[3];
+    if(line[4] == 0xB1)     Left_rear_speed = ((int16)line[5] << 8) | line[6];
     if(line[7] == 0xB2)    slave_position      = ((int16)line[8] << 8) | line[9];
 }
 
@@ -134,7 +134,8 @@ int main(void)
     DisableGlobalIRQ();
     board_init();           //务必保留，本函数用于初始化MPU 时钟 调试串口
 
-    ips114_init();
+    //ips114_init();
+    init();
 
     //串口的抢占优先级一定要比外部中断的抢占优先级高，这样才能实时接收从机数据
     //串口的抢占优先级一定要比外部中断的抢占优先级高，这样才能实时接收从机数据
@@ -150,12 +151,17 @@ int main(void)
     EnableGlobalIRQ(0);
     while(1)
     {
-        if(show_flag)
+        if(show_flag)//主机接收编码器值完成后
         {
             //将接收到的从机数据显示到屏幕上。
-            ips114_showint16(0, 0, slave_encoder_left);
-            ips114_showint16(0, 1, slave_encoder_right);
-            ips114_showint16(0, 2, slave_position);
+        	get_encode();
+        	palstance_pid(&pid_palstance, icm_gyro_z - 8, target_Wz);
+        	speed_conversion(target_Vx,target_Vy,pid_palstance.result);
+        	lcd_showint16(0, 0, Left_rear_speed);
+        	lcd_showint16(0, 1, Right_rear_speed);
+        	lcd_showint16(0, 2, Left_front_speed);
+        	lcd_showint16(0, 3, Right_front_speed);
+        	lcd_showint16(0, 4, slave_position);
             show_flag = 0;
         }
     }

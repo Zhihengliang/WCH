@@ -10,10 +10,10 @@
 void Left_front_pwm_set1(int Left_frontvalue) {
 	if (Left_frontvalue <= 0) {
 		pwm_duty(LEFT_FRONT_PWM, -Left_frontvalue);
-		gpio_set(LEFT_FRONT_DIR, 0);
+		gpio_set(LEFT_FRONT_DIR, 1);
 	} else {
         pwm_duty(LEFT_FRONT_PWM, Left_frontvalue);
-        gpio_set(LEFT_FRONT_DIR, 1);
+        gpio_set(LEFT_FRONT_DIR, 0);
 	}
 }
 //-------------------------------------------------------------------------------------------------------------------
@@ -27,10 +27,10 @@ void Left_front_pwm_set1(int Left_frontvalue) {
 void Right_front_pwm_set1(int Right_frontvalue) {
 	if (Right_frontvalue <= 0) {
 		pwm_duty(RIGHT_FRONT_PWM, -Right_frontvalue);
-		gpio_set(RIGHT_FRONT_DIR, 1);
+		gpio_set(RIGHT_FRONT_DIR, 0);
 	} else {
         pwm_duty(RIGHT_FRONT_PWM, Right_frontvalue);
-        gpio_set(RIGHT_FRONT_DIR, 0);
+        gpio_set(RIGHT_FRONT_DIR, 1);
 	}
 }
 //-------------------------------------------------------------------------------------------------------------------
@@ -76,9 +76,9 @@ void Right_rear_pwm_set1(int Right_rearvalue) {
 //-------------------------------------------------------------------------------------------------------------------
 void get_encode(void){
     //测速
-    Left_front_speed = -timer_quad_get(LEFT_FRONT_GPT);
+    Left_front_speed = timer_quad_get(LEFT_FRONT_GPT);
     timer_quad_clear(LEFT_FRONT_GPT);
-    Right_front_speed = timer_quad_get(RIGHT_FRONT_GPT);
+    Right_front_speed = -timer_quad_get(RIGHT_FRONT_GPT);
     timer_quad_clear(RIGHT_FRONT_GPT);
 //    Left_rear_speed = -timer_quad_get(LEFT_REAR_GPT);
 //    timer_quad_clear(LEFT_REAR_GPT);

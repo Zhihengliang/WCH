@@ -2,13 +2,13 @@
 #define __CAR_CONTROL_H_
 #include "headfile.h"
 
-#define LEFT_FRONT_PWM     B6
+#define LEFT_FRONT_PWM     PWM4_CH1_B6
 #define LEFT_FRONT_DIR     C10
-#define RIGHT_FRONT_PWM    B7
+#define RIGHT_FRONT_PWM    PWM4_CH2_B7
 #define RIGHT_FRONT_DIR    C11
-#define LEFT_REAR_PWM      B8
+#define LEFT_REAR_PWM      PWM4_CH3_B8
 #define LEFT_REAR_DIR      B12
-#define RIGHT_REAR_PWM     B9
+#define RIGHT_REAR_PWM     PWM4_CH4_B9
 #define RIGHT_REAR_DIR     A8
 
 #define LEFT_FRONT_GPT     TIMER_2

@@ -56,12 +56,12 @@ void process_data(void)
 {
     temp_buff[0] = 0xD8;                         //帧头
     temp_buff[1] = 0xB0;                         //功能字
-    temp_buff[2] = slave_encoder_left>>8;        //数据高8位
-    temp_buff[3] = slave_encoder_left&0xFF;      //数据低8位
+    temp_buff[2] = Left_rear_speed>>8;        //数据高8位
+    temp_buff[3] = Left_rear_speed&0xFF;      //数据低8位
 
     temp_buff[4] = 0xB1;                         //功能字
-    temp_buff[5] = slave_encoder_right>>8;       //数据高8位
-    temp_buff[6] = slave_encoder_right&0xFF;     //数据低8位
+    temp_buff[5] = Right_rear_speed>>8;       //数据高8位
+    temp_buff[6] = Right_rear_speed&0xFF;     //数据低8位
 
     temp_buff[7] = 0xB2;                         //功能字
     temp_buff[8] = slave_position>>8;            //数据高8位
@@ -85,7 +85,9 @@ void TIM4_IRQHandler(void)
         TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
         GPIO_PIN_SET(A0);                           //A0引脚拉高
 
-        get_sensor_data();                          //获取传感器数据。
+        //get_sensor_data();
+        get_encode();//获取传感器数据。
+
         process_data();                             //根据协议处理数据，并存入temp_buff中。
         uart_putbuff(UART_3, temp_buff, LINE_LEN);  //通过串口3将数据发送出去。
 
@@ -97,10 +99,10 @@ int main(void)
 {
     DisableGlobalIRQ();
     board_init();           //务必保留，本函数用于初始化MPU 时钟 调试串口
-
+    init();
     gpio_init(A0, GPO, 0, GPIO_PIN_CONFIG);                 //同步引脚初始化
     uart_init(UART_3, 460800, UART3_TX_B10, UART3_RX_B11);  //串口3初始化，波特率460800
-    timer_pit_interrupt_ms(TIMER_4, 5);                     //定时器4初始化
+    timer_pit_interrupt_ms(TIMER_4, 50);                     //定时器4初始化
 
     EnableGlobalIRQ(0);
     while(1)

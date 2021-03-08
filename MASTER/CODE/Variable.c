@@ -29,7 +29,7 @@ short Right_rear_goalspeed = 0;                 //右后轮目标速度
 //PID_V
 short P_V = 3;                                  //速度环的PID
 short I_V = 1;
-short D_V = 1;
+short D_V = 0;
 //PID_W
 short P_W = 2;                                  //角度环的PID
 short I_W = 1;                                  //实际效果为I_W/16 !!!
@@ -57,7 +57,7 @@ uint8 key3_flag;
 uint8 key4_flag;
 //目标速度与角速度
 short target_Vx=0;
-short target_Vy=40;
+short target_Vy=120;
 short target_Wz=0;
 //结算后速度数组
 short actual_velocity[3]={0};

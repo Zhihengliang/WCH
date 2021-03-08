@@ -75,11 +75,12 @@ void Right_rear_pwm_set1(int Right_rearvalue) {
 //  Sample usage:               get_encode();//测速与PID控制，输出PWM,获取陀螺仪
 //-------------------------------------------------------------------------------------------------------------------
 void get_encode(void){
-    //测速
-    Left_front_speed = timer_quad_get(LEFT_FRONT_GPT);
-    timer_quad_clear(LEFT_FRONT_GPT);
-    Right_front_speed = -timer_quad_get(RIGHT_FRONT_GPT);
-    timer_quad_clear(RIGHT_FRONT_GPT);
+    //测速(已经移动到串口接收中断)
+//    Left_front_speed = timer_quad_get(LEFT_FRONT_GPT);
+//    timer_quad_clear(LEFT_FRONT_GPT);
+//    Right_front_speed = -timer_quad_get(RIGHT_FRONT_GPT);
+//    timer_quad_clear(RIGHT_FRONT_GPT);
+    //从机测速
 //    Left_rear_speed = -timer_quad_get(LEFT_REAR_GPT);
 //    timer_quad_clear(LEFT_REAR_GPT);
 //    Right_rear_speed = timer_quad_get(RIGHT_REAR_GPT);

@@ -102,7 +102,7 @@ int main(void)
     init();
     gpio_init(A0, GPO, 0, GPIO_PIN_CONFIG);                 //同步引脚初始化
     uart_init(UART_3, 460800, UART3_TX_B10, UART3_RX_B11);  //串口3初始化，波特率460800
-    timer_pit_interrupt_ms(TIMER_4, 50);                     //定时器4初始化
+    timer_pit_interrupt_ms(TIMER_4, 20);                     //定时器4初始化
 
     EnableGlobalIRQ(0);
     while(1)

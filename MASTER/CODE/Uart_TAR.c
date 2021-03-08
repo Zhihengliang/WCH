@@ -49,7 +49,8 @@ void Resolve_VAW(void)
 void Remote_control(void)
 {
     uint8 dat;
-    uart_query(UART_1,&dat);
+    while(uart_query(UART_1,&dat));
+
     switch((unsigned char)(dat)){
         case 0:
             target_Vx=0;

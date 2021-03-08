@@ -124,6 +124,11 @@ void EXTI0_IRQHandler(void)
         while(uart_flag != E_OK);                       //等待接收数据
         uart_flag = E_START;                            //清空标志位
         data_analysis(temp_buff);                       //数据解析
+        //编码器采集
+        Left_front_speed = timer_quad_get(LEFT_FRONT_GPT);
+		timer_quad_clear(LEFT_FRONT_GPT);
+		Right_front_speed = -timer_quad_get(RIGHT_FRONT_GPT);
+		timer_quad_clear(RIGHT_FRONT_GPT);
 
         show_flag = 1;                                  //屏幕显示标志位
     }
@@ -157,7 +162,8 @@ int main(void)
         	get_encode();
         	palstance_pid(&pid_palstance, icm_gyro_z - 8, target_Wz);
         	speed_conversion(target_Vx,target_Vy,pid_palstance.result);
-        	lcd_showint16(0, 0, Left_rear_speed);
+        	Resolve_VAW();
+        	Uart_sent_wave(actual_velocity,3);
         	lcd_showint16(0, 1, Right_rear_speed);
         	lcd_showint16(0, 2, Left_front_speed);
         	lcd_showint16(0, 3, Right_front_speed);

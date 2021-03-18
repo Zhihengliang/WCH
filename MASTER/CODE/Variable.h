@@ -84,4 +84,8 @@ extern uint8 *pic;
 extern uint8 image_threshold;
 extern int flag_j;
 extern int flag_uart[4];
+//从核目标速度
+extern int16 slave_target_Vx ;                                //目标 Vx
+extern int16 slave_target_Vy ;                                //目标 Vy
+extern int16 slave_target_Wz ;                                //目标 Wz
 #endif/* ___VARIABLE_H_ */

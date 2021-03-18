@@ -42,7 +42,7 @@ void palstance_pid(PID *pid, short actual, short set ) {
             times_palstance=2;
             int p = 0, i = 0, d = 0;
             pid->err = set - actual;
-            p = pid->err - pid->last_err;
+            p = (pid->err - pid->last_err)/16;
             i = (pid->err)>>4;//除16
             d = pid->err - 2 * pid->last_err + pid->last_last_err;
             pid->result += pid->kp * p + pid->ki * i + pid->kd * d;//角速度环结果

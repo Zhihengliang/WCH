@@ -55,10 +55,10 @@ uint8 key1_flag;
 uint8 key2_flag;
 uint8 key3_flag;
 //uint8 key4_flag;
-////目标速度与角速度
-//short target_Vx=40;
-//short target_Vy=0;
-//short target_Wz=0;
+//目标速度与角速度
+short target_Vx;
+short target_Vy;
+short target_Wz;
 ////结算后速度数组
 //short actual_velocity[3]={0};
 
@@ -71,3 +71,71 @@ uint8 image_threshold;  //图像阈值
 //串口调参循环标志位
 int flag_j=0;
 int flag_uart[4];
+
+
+int intercept_C;
+int intercept_L;
+int intercept_R;
+int slope_C;
+int slope_L;
+int slope_R;
+
+//int Pixels[P_H][P_W];
+//    1、左线值：lefetline
+//    2、右线值：rightline
+//    3、中线值：centerline
+//    4、每行赛道宽度：fiv_width
+//    5、每行左线点是否扫到：leftfindflag
+//    6、每行右线点是否扫到：rightfindflag
+//    7、中线断开的目标行：break_hangshu
+//    8、50行以内两边都扫到的次数：flag_s
+//    9、25行以内两边全丢的次数：times
+//    10、20行以上左线突然性断裂的目标行：leftline_duan_dian
+//    11、20行以上右线突然性断裂的目标行：rightline_duan_dian
+//    12、保存左线位置：left_pos
+//    13、保存右线位置：right_pos
+//    14、这次与上一次都没扫到判定为丢线：lost_b_count
+int leftline[P_H];
+int forecast_leftline[P_H];
+int rightline[P_H];
+int forecast_rightline[P_H];
+int centerline[P_H];
+int fiv_width[P_H];
+
+
+int leftfindflag[P_H];
+int rightfindflag[P_H];
+int break_hangshu;
+int flag_s;
+int times;
+int leftline_duan_dian;
+int rightline_duan_dian;
+int left_pos[P_H];
+int right_pos[P_H];
+int center_pos[P_H];
+int lost_b_count;
+int Deal_flag[P_H];//处理数据是否有效标志数组
+//    lostleft_times;前n行左线未扫到的次数
+//    lostright_times;前n行右线未扫到的次数
+//    l_start;在l_start以下的左线全是未扫到
+//    r_start;在r_start以下的右线线全是未扫到
+int lostleft_times;
+int lostright_times;
+int l_start;
+int r_start;
+
+int rou_of_right;
+int rou_of_left;
+
+char Shi_zi_flag;                //十字标志位
+int valid_line=0;               //最大有效行
+int maxBline_diff;              //最大宽度
+int lost_already;               //已丢线
+
+int ring_size=0;
+int ring_left_flag=0;
+int ring_right_flag=0;
+int ring_hang_pos=0;
+int ring_lie_pos=0;
+int black_point_start;
+char line_lose_flag;

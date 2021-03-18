@@ -23,12 +23,12 @@
 
 #include "headfile.h"
 
-#define LINE_LEN                11              //数据长度
+#define LINE_LEN                17              //数据长度
 uint8 temp_buff[LINE_LEN];                      //从机向主机发送数据BUFF
+int8 show_image_inMain_flage = 0;               //在主函数显示图像标志位
+int8 process_image_inMain_flage = 0;               //在主函数图像处理标志位
+int8 show_figure_inMain_flage = 0;               //在主函数数据显示标志位
 
-int16 slave_encoder_left;                       //从机左编码器值
-int16 slave_encoder_right;                      //从机右编码器值
-int16 slave_position;                           //从机转角值
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      获取传感器数据
@@ -40,9 +40,6 @@ int16 slave_position;                           //从机转角值
 void get_sensor_data(void)
 {
     //这里仅仅是提供一个模拟数据
-    slave_encoder_left++;
-    slave_encoder_right--;
-    slave_position += 10;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -64,10 +61,18 @@ void process_data(void)
     temp_buff[6] = Right_rear_speed&0xFF;     //数据低8位
 
     temp_buff[7] = 0xB2;                         //功能字
-    temp_buff[8] = slave_position>>8;            //数据高8位
-    temp_buff[9] = slave_position&0xFF;          //数据低8位
+    temp_buff[8] = target_Vx>>8;            //数据高8位
+    temp_buff[9] = target_Vx&0xFF;          //数据低8位
 
-    temp_buff[10] = 0xEE;                        //帧尾
+    temp_buff[10] = 0xB3;                         //功能字
+    temp_buff[11] = target_Vy>>8;            //数据高8位
+    temp_buff[12] = target_Vy&0xFF;          //数据低8位
+
+    temp_buff[13] = 0xB4;                         //功能字
+    temp_buff[14] = target_Wz>>8;            //数据高8位
+    temp_buff[15] = target_Wz&0xFF;          //数据低8位
+
+    temp_buff[16] = 0xEE;                        //帧尾
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -92,6 +97,9 @@ void TIM4_IRQHandler(void)
         uart_putbuff(UART_3, temp_buff, LINE_LEN);  //通过串口3将数据发送出去。
 
         GPIO_PIN_RESET(A0);                         //A0引脚拉低
+        show_image_inMain_flage =0;//图像显示
+        process_image_inMain_flage = 1;//图像处理
+        show_figure_inMain_flage=1;//数据显示
     }
 }
 
@@ -107,7 +115,30 @@ int main(void)
     EnableGlobalIRQ(0);
     while(1)
     {
+        if(1 == show_image_inMain_flage)
+        {
+            lcd_displayimage032(mt9v03x_image[0], MT9V03X_W, MT9V03X_H);
+            show_image_inMain_flage=0;
+        }
 
+        if(1 == process_image_inMain_flage)
+        {
+            image_center(0);
+            process_image_inMain_flage=0;
+        }
+        if(1 == show_figure_inMain_flage)
+        {
+            lcd_showint16(0, 1, target_Vx);
+            lcd_showint16(0, 2, target_Vy);
+            lcd_showint16(0, 3, target_Wz);
+            lcd_showint16(80, 1, centerline[5]);
+            lcd_showint16(80, 2, centerline[6]);
+            lcd_showint16(80, 3, centerline[7]);
+            lcd_showint16(80, 4, centerline[8]);
+            lcd_showint16(80, 5, centerline[9]);
+
+            show_figure_inMain_flage=0;
+        }
     }
 }
 

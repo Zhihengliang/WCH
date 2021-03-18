@@ -28,7 +28,7 @@
 #define E_FRAME_HEADER_ERROR    2       //帧头错误
 #define E_FRAME_RTAIL_ERROR     3       //帧尾错误
 
-#define LINE_LEN                11      //数据长度
+#define LINE_LEN                17      //数据长度
 uint8   temp_buff[LINE_LEN];            //主机用于接收数据的BUFF
 vuint8  uart_flag;                      //接收数据标志位
 
@@ -86,7 +86,10 @@ void data_analysis(uint8 *line)
 {
     if(line[1] == 0xB0)     Right_rear_speed = ((int16)line[2] << 8) | line[3];
     if(line[4] == 0xB1)     Left_rear_speed = ((int16)line[5] << 8) | line[6];
-    if(line[7] == 0xB2)    slave_position      = ((int16)line[8] << 8) | line[9];
+    if(line[7] == 0xB2)    slave_target_Vx      = ((int16)line[8] << 8) | line[9];
+    if(line[10] == 0xB3)    slave_target_Vy      = ((int16)line[11] << 8) | line[12];
+    if(line[13] == 0xB4)    slave_target_Wz      = ((int16)line[14] << 8) | line[15];
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -129,7 +132,15 @@ void EXTI0_IRQHandler(void)
 		timer_quad_clear(LEFT_FRONT_GPT);
 		Right_front_speed = -timer_quad_get(RIGHT_FRONT_GPT);
 		timer_quad_clear(RIGHT_FRONT_GPT);
+		//目标速度赋值
+		if(1)
+		{
+		    target_Vy= slave_target_Vy ;
+		    target_Vx= slave_target_Vx ;
+		    target_Wz = slave_target_Wz;
+		}
 
+		//
         show_flag = 1;                                  //屏幕显示标志位
     }
 }
@@ -167,7 +178,10 @@ int main(void)
         	lcd_showint16(0, 1, Right_rear_speed);
         	lcd_showint16(0, 2, Left_front_speed);
         	lcd_showint16(0, 3, Right_front_speed);
-        	lcd_showint16(0, 4, slave_position);
+        	lcd_showint16(0, 4, Left_rear_speed);
+        	//
+
+        	//
             show_flag = 0;
         }
     }

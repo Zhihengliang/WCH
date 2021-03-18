@@ -83,5 +83,12 @@
 //#include "Pid.h"
 #include "Variable.h"
 #include "Uart_TAR.h"
+
+#include "image_test.h"
 //#include  "inductor.h"
+//
+#include "camera_conrtol_main.h"
+#include "camera_findline.h"
+#include "camera_special_ele.h"
+#include "image_run.h"
 #endif

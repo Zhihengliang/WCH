@@ -9,7 +9,7 @@ char txt[32];                                   //用于sprintf的公用字符�
 unsigned char times_palstance=0;                //角速度环计数参数
 
 unsigned short limit_pwm = 9999;                //限幅
-unsigned short limit_palstance = 1000;           //角速度限幅!!!
+unsigned short limit_palstance = 3000;           //角速度限幅!!!
 int dx = 0;
 int dy = 0;
 int dz = 0;
@@ -27,8 +27,8 @@ short Right_front_goalspeed = 0;                //右前轮目标速度
 short Left_rear_goalspeed = 0;                  //左后轮目标速度
 short Right_rear_goalspeed = 0;                 //右后轮目标速度
 //PID_V
-short P_V = 3;                                  //速度环的PID
-short I_V = 1;
+short P_V = 15;                                  //速度环的PID
+short I_V = 2;
 short D_V = 0;
 //PID_W
 short P_W = 2;                                  //角度环的PID
@@ -56,9 +56,9 @@ uint8 key2_flag;
 uint8 key3_flag;
 uint8 key4_flag;
 //目标速度与角速度
-short target_Vx=0;
-short target_Vy=120;
-short target_Wz=0;
+short target_Vx=0;//120
+short target_Vy=0;//120
+short target_Wz=0;//900
 //结算后速度数组
 short actual_velocity[3]={0};
 
@@ -71,3 +71,7 @@ uint8 image_threshold;  //图像阈值
 //串口调参循环标志位
 int flag_j=0;
 int flag_uart[4];
+//从核目标速度
+int16 slave_target_Vx = 0;                                //目标 Vx
+int16 slave_target_Vy = 0;                                //目标 Vy
+int16 slave_target_Wz = 0;                                //目标 Wz

@@ -9,6 +9,8 @@
 void init(void) {
 	//TFT初始化
 	lcd_init();
+	//摄像头初始化
+	mt9v03x_init();
 
 	//测速初始化
 //	timer_quad_init(LEFT_FRONT_GPT, LEFT_FRONT_GPT_P, LEFT_FRONT_GPT_N);

@@ -134,6 +134,24 @@ void EXTI0_IRQHandler(void)
     }
 }
 
+void control_test(void)
+{
+
+    target_Vx=0;
+    target_Vy=0;
+    target_Wz=200;
+/*
+    target_Vx=400;
+    target_Vy=0;
+    target_Wz=0;
+
+    target_Vx=0;
+    target_Vy=400;
+    target_Wz=0;
+
+
+*/
+}
 int main(void)
 {
     DisableGlobalIRQ();
@@ -146,6 +164,7 @@ int main(void)
     //串口的抢占优先级一定要比外部中断的抢占优先级高，这样才能实时接收从机数据
     //串口的抢占优先级一定要比外部中断的抢占优先级高，这样才能实时接收从机数据
 
+
     uart_init(UART_3, 460800, UART3_TX_B10, UART3_RX_B11);  //串口3初始化，波特率460800
     uart_rx_irq(UART_3, ENABLE);                            //默认抢占优先级0 次优先级0。
     gpio_interrupt_init(A0, RISING, GPIO_INT_CONFIG);       //A0初始化为GPIO 上升沿触发
@@ -153,6 +172,7 @@ int main(void)
 
     //此处编写用户代码(例如：外设初始化代码等)
     //总中断最后开启
+    control_test();
     EnableGlobalIRQ(0);
     while(1)
     {
@@ -169,7 +189,9 @@ int main(void)
         	lcd_showint16(0, 3, Right_front_speed);
         	lcd_showint16(0, 4, slave_position);
             show_flag = 0;
+
         }
+
     }
 }
 

@@ -161,3 +161,43 @@ void nixu(int a,int b,int R[]) {
 		R[b - j] = k;
 	}
 }
+//-------------------------------------------------------------------------------------------------------------------
+//  @brief      开平方根
+//  @param      x
+//  @since      v1.0
+//  Sample usage:             my_sqrt(x);
+//-------------------------------------------------------------------------------------------------------------------
+unsigned int my_sqrt(unsigned int x)
+{
+    unsigned char ans=0,p=0x80;
+    while(p!=0)
+    {
+        ans+=p;
+        if(ans*ans>x)
+        {
+            ans-=p;
+        }
+        p=(unsigned char)(p/2);
+    }
+    return(ans);
+}
+//-------------------------------------------------------------------------------------------------------------------
+//  @brief      两个无符号数相减的绝对值
+//  @param      diff1,diff2
+//  @since      1.0
+//  Sample usage:             abs_sub(x);
+//-------------------------------------------------------------------------------------------------------------------
+
+unsigned int abs_sub(unsigned int diff1,unsigned int diff2)
+{
+    unsigned int temp;
+    if(diff1>diff2)
+    {
+        temp=diff1-diff2;
+    }
+    else
+    {
+        temp=diff2-diff1;
+    }
+    return temp;
+}

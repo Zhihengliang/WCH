@@ -201,3 +201,31 @@ unsigned int abs_sub(unsigned int diff1,unsigned int diff2)
     }
     return temp;
 }
+//-------------------------------------------------------------------------------------------------------------------
+//  @brief      曲率计算
+//  @param      x
+//  @param      y
+//  @return     float K 曲率
+//  @since      v1.0
+//  Sample usage:             process_curvity(x1, y1, x2, y2, x3,y3);
+//-------------------------------------------------------------------------------------------------------------------
+float process_curvity(short x1, short y1, short x2, short y2, short x3, short y3)
+{
+    float K;
+   //曲率
+    int S_of_ABC = ((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1)) / 2;
+    //面积的符号表示方向
+    short q1 = (short)((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+    short AB = my_sqrt(q1);
+    q1 = (short)((x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2));
+    short BC = my_sqrt(q1);
+    q1 = (short)((x3 - x1) * (x3 - x1) + (y3 - y1) * (y3 - y1));
+    short AC = my_sqrt(q1);
+    if (AB * BC * AC == 0)
+    {
+        K = 0;
+    }
+    else
+        K = (float)4 * S_of_ABC / (AB * BC * AC);
+    return K;
+}

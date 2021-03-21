@@ -139,3 +139,7 @@ int ring_hang_pos=0;
 int ring_lie_pos=0;
 int black_point_start;
 char line_lose_flag;
+
+char left_flag=0;
+char right_flag=0;
+char nomal_flag=0;

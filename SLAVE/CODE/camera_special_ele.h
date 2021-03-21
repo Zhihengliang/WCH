@@ -2,5 +2,5 @@
 #define __CAMERA_SPECIAL_ELE_H_
 #include "headfile.h"
 int Slope_center();
-int Diff_center();
+int Diff_center(short bias_cen);
 #endif

@@ -80,7 +80,7 @@ int slope_C;
 int slope_L;
 int slope_R;
 
-//int Pixels[P_H][P_W];
+int Pixels[P_H][P_W];
 //    1、左线值：lefetline
 //    2、右线值：rightline
 //    3、中线值：centerline
@@ -139,5 +139,9 @@ int ring_hang_pos=0;
 int ring_lie_pos=0;
 int black_point_start;
 char line_lose_flag;
-//
+
+char left_flag=0;
+char right_flag=0;
+char nomal_flag=0;
+
 short pit_times = 0;

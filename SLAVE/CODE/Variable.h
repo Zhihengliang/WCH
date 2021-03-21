@@ -120,7 +120,7 @@ extern int slope_C;
 extern int slope_L;
 extern int slope_R;
 
-extern uint8 Pixels[P_H][P_W];
+extern int Pixels[P_H][P_W];
 //    1、左线值：lefetline
 //    2、右线值：rightline
 //    3、中线值：centerline
@@ -178,7 +178,9 @@ extern int ring_hang_pos;
 extern int ring_lie_pos;
 extern int black_point_start;
 extern char line_lose_flag;
-//
-extern short pit_times ;
 
+extern char left_flag;
+extern char right_flag;
+extern char nomal_flag;
+extern short pit_times ;
 #endif/* ___VARIABLE_H_ */

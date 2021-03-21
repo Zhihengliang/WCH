@@ -169,3 +169,71 @@ void nixu(int a,int b,int R[]) {
 		R[b - j] = k;
 	}
 }
+//-------------------------------------------------------------------------------------------------------------------
+//  @brief      开平方根
+//  @param      x
+//  @since      v1.0
+//  Sample usage:             my_sqrt(x);
+//-------------------------------------------------------------------------------------------------------------------
+unsigned int my_sqrt(unsigned int x)
+{
+    unsigned char ans=0,p=0x80;
+    while(p!=0)
+    {
+        ans+=p;
+        if(ans*ans>x)
+        {
+            ans-=p;
+        }
+        p=(unsigned char)(p/2);
+    }
+    return(ans);
+}
+//-------------------------------------------------------------------------------------------------------------------
+//  @brief      两个无符号数相减的绝对值
+//  @param      diff1,diff2
+//  @since      1.0
+//  Sample usage:             abs_sub(x);
+//-------------------------------------------------------------------------------------------------------------------
+
+unsigned int abs_sub(unsigned int diff1,unsigned int diff2)
+{
+    unsigned int temp;
+    if(diff1>diff2)
+    {
+        temp=diff1-diff2;
+    }
+    else
+    {
+        temp=diff2-diff1;
+    }
+    return temp;
+}
+//-------------------------------------------------------------------------------------------------------------------
+//  @brief      曲率计算
+//  @param      x
+//  @param      y
+//  @return     float K 曲率
+//  @since      v1.0
+//  Sample usage:             process_curvity(x1, y1, x2, y2, x3,y3);
+//-------------------------------------------------------------------------------------------------------------------
+float process_curvity(short x1, short y1, short x2, short y2, short x3, short y3)
+{
+    float K;
+   //曲率
+    int S_of_ABC = ((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1)) / 2;
+    //面积的符号表示方向
+    short q1 = (short)((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+    short AB = my_sqrt(q1);
+    q1 = (short)((x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2));
+    short BC = my_sqrt(q1);
+    q1 = (short)((x3 - x1) * (x3 - x1) + (y3 - y1) * (y3 - y1));
+    short AC = my_sqrt(q1);
+    if (AB * BC * AC == 0)
+    {
+        K = 0;
+    }
+    else
+        K = (float)4 * S_of_ABC / (AB * BC * AC);
+    return K;
+}

@@ -56,9 +56,9 @@ uint8 key2_flag;
 uint8 key3_flag;
 //uint8 key4_flag;
 //目标速度与角速度
-short target_Vx;
-short target_Vy;
-short target_Wz;
+short target_Vx=0;
+short target_Vy=0;
+short target_Wz=0;
 ////结算后速度数组
 //short actual_velocity[3]={0};
 
@@ -139,3 +139,5 @@ int ring_hang_pos=0;
 int ring_lie_pos=0;
 int black_point_start;
 char line_lose_flag;
+//
+short pit_times = 0;

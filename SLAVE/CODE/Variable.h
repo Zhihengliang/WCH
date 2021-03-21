@@ -178,6 +178,7 @@ extern int ring_hang_pos;
 extern int ring_lie_pos;
 extern int black_point_start;
 extern char line_lose_flag;
-
+//
+extern short pit_times ;
 
 #endif/* ___VARIABLE_H_ */

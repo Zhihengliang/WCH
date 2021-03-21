@@ -11,6 +11,10 @@ void init(void) {
 	lcd_init();
 	//摄像头初始化
 	mt9v03x_init();
+	//按钮中断初始化
+	gpio_interrupt_init(C9, FALLING, GPIO_INT_CONFIG);
+	gpio_interrupt_init(C8, FALLING, GPIO_INT_CONFIG);
+	nvic_init(EXTI9_5_IRQn, 0, 1, ENABLE);                //EXTI9_5_IRQn优先级配置，抢占优先级0，次优先级1
 
 	//测速初始化
 //	timer_quad_init(LEFT_FRONT_GPT, LEFT_FRONT_GPT_P, LEFT_FRONT_GPT_N);
@@ -53,10 +57,12 @@ void init(void) {
 //	timer_pit_interrupt_ms(TIMER_1, 50);
 //	pit_interrupt_ms(CCU6_0, PIT_CH0, 10);
 
-    //按键初始化
+    //按键初始化(暂时关闭)
+    /*
     gpio_init(KEY1, GPO, 0, GPIO_PIN_CONFIG);
     gpio_init(KEY2, GPO, 0, GPIO_PIN_CONFIG);
     gpio_init(KEY3, GPO, 0, GPIO_PIN_CONFIG);
+    */
 //    gpio_init(KEY1,GPI,0,PULLUP);
 //    gpio_init(KEY2,GPI,0,PULLUP);
 //    gpio_init(KEY3,GPI,0,PULLUP);

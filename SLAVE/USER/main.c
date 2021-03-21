@@ -100,6 +100,7 @@ void TIM4_IRQHandler(void)
         show_image_inMain_flage =0;//图像显示
         process_image_inMain_flage = 1;//图像处理
         show_figure_inMain_flage=1;//数据显示
+        pit_times++;
     }
 }
 
@@ -111,7 +112,7 @@ int main(void)
     gpio_init(A0, GPO, 0, GPIO_PIN_CONFIG);                 //同步引脚初始化
     uart_init(UART_3, 460800, UART3_TX_B10, UART3_RX_B11);  //串口3初始化，波特率460800
     timer_pit_interrupt_ms(TIMER_4, 20);                     //定时器4初始化
-
+    nvic_init(TIM4_IRQn, 0, 2, ENABLE);
     EnableGlobalIRQ(0);
     while(1)
     {
@@ -123,19 +124,13 @@ int main(void)
 
         if(1 == process_image_inMain_flage)
         {
-            image_center(0);
+            image_center(90);
             process_image_inMain_flage=0;
         }
         if(1 == show_figure_inMain_flage)
         {
-            lcd_showint16(0, 1, target_Vx);
-            lcd_showint16(0, 2, target_Vy);
-            lcd_showint16(0, 3, target_Wz);
-            lcd_showint16(80, 1, centerline[5]);
-            lcd_showint16(80, 2, centerline[6]);
-            lcd_showint16(80, 3, centerline[7]);
-            lcd_showint16(80, 4, centerline[8]);
-            lcd_showint16(80, 5, centerline[9]);
+            clear_lcd_page();
+            show_page();
 
             show_figure_inMain_flage=0;
         }

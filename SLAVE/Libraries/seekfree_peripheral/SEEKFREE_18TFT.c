@@ -650,7 +650,7 @@ void lcd_displayimage032_zoom(uint8 *p, uint16 width, uint16 height, uint16 dis_
     uint16 color = 0;
     uint16 temp = 0;
 
-    lcd_set_region(0,0,dis_width-1,dis_height-1);//设置显示区域 
+    lcd_set_region(0,0,dis_width-1,dis_height-1);//设置显示区域
     
     for(j=0;j<dis_height;j++)
     {

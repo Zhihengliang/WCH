@@ -66,14 +66,14 @@ int16 MT9V03X_CFG[CONFIG_FINISH][2]=
 //从摄像头内部获取到的配置数据
 int16 GET_CFG[CONFIG_FINISH-1][2]=
 {
-    {AUTO_EXP,          0},   //自动曝光设置      
-    {EXP_TIME,          0},   //曝光时间          
-    {FPS,               0},   //图像帧率          
-    {SET_COL,           0},   //图像列数量        
-    {SET_ROW,           0},   //图像行数量        
-    {LR_OFFSET,         0},   //图像左右偏移量    
-    {UD_OFFSET,         0},   //图像上下偏移量    
-    {GAIN,              0},   //图像增益          
+    {AUTO_EXP,          0},   //自动曝光设置
+    {EXP_TIME,          0},   //曝光时间
+    {FPS,               0},   //图像帧率
+    {SET_COL,           0},   //图像列数量
+    {SET_ROW,           0},   //图像行数量
+    {LR_OFFSET,         0},   //图像左右偏移量
+    {UD_OFFSET,         0},   //图像上下偏移量
+    {GAIN,              0},   //图像增益
 };
 
 

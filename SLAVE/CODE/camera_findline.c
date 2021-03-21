@@ -17,17 +17,18 @@
 //  @since      v1.0
 //  Sample usage:             data_collection(PIC_W,PIC_H);
 //-------------------------------------------------------------------------------------------------------------------
+int old=P_W/2;
 void data_collection(int PIC_W, int PIC_H)
 {
     int i=0;
     int j=0;
-    int old=PIC_W/2;
-    for (j = 0; j < PIC_H; j++)
+
+    for (j = 0; j < PIC_H; j++)//???
     {
      for (i = old; i >= 0 && i < PIC_W-1; i--)
      {
          fiv_width[j]++;
-         if (Pixels[j][ i + 1] < color_yu && Pixels[j][ i] < color_yu)
+         if (Pixels[PIC_H-j-1][ i + 1] < color_yu && Pixels[PIC_H-j-1][ i] < color_yu)
          {
              leftfindflag[j] = 1;
              leftline[j] = (i + 1);
@@ -38,7 +39,7 @@ void data_collection(int PIC_W, int PIC_H)
      for (i = old; i <= PIC_W && i > 1; i++)
      {
          fiv_width[j]++;
-         if (Pixels[j][ i - 1] >= color_yu && Pixels[j][ i] >= color_yu)
+         if (Pixels[PIC_H-j-1][ i - 1] < color_yu && Pixels[PIC_H-j-1][ i] < color_yu)//？？？
          {
              rightfindflag[j]  = 1;
              rightline[j] = (i - 1);
@@ -50,7 +51,7 @@ void data_collection(int PIC_W, int PIC_H)
      if (j >= 20 && (leftline[j] - leftline[j - 1]) >= 20) leftline_duan_dian = j;
      if (j >= 20 && (rightline[j] - rightline[j - 1]) <= -20) rightline_duan_dian = j;
      centerline[j] = ((leftline[j] + rightline[j]) / 2);
-     if ((Pixels[j][ centerline[j]]) >= color_yu && (Pixels[j + 1][ centerline[j]]) >= color_yu)
+     if ((Pixels[PIC_H-j-1][ centerline[j]]) < color_yu && (Pixels[PIC_H-j-2][ centerline[j]]) < color_yu)//???
      {
          break_hangshu = j;
          //printf("%d",break_hangshu);

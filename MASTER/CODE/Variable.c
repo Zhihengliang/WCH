@@ -28,11 +28,11 @@ short Left_rear_goalspeed = 0;                  //左后轮目标速度
 short Right_rear_goalspeed = 0;                 //右后轮目标速度
 //PID_V
 short P_V = 15;                                  //速度环的PID
-short I_V = 2;
+short I_V = 2;                                  //2
 short D_V = 0;
 //PID_W
 short P_W = 2;                                  //角度环的PID
-short I_W = 1;                                  //实际效果为I_W/16 !!!
+short I_W = 1;                                  //实际效果为I_W/16 !!!1
 short D_W = 0;
 //PID结构体
 PID pid_left_front;

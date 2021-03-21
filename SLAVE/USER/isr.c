@@ -63,6 +63,7 @@ void EXTI0_IRQHandler(void)
 {
 
 
+
 }
 
 void EXTI1_IRQHandler(void)
@@ -97,8 +98,21 @@ void EXTI4_IRQHandler(void)
 
 void EXTI9_5_IRQHandler(void)
 {
+    //按钮C8 C9中断函数
+    if(SET == EXTI_GetITStatus(EXTI_Line8))
+    {
 
+        page_up();
+        clear_page_flag=1;
+        EXTI_ClearITPendingBit(EXTI_Line8);
+    }
+    if(SET == EXTI_GetITStatus(EXTI_Line9))
+    {
 
+        page_down();
+        clear_page_flag=1;
+        EXTI_ClearITPendingBit(EXTI_Line9);
+    }
 }
 
 void EXTI15_10_IRQHandler(void)

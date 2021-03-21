@@ -4,7 +4,7 @@
 #define type_C 0
 #define type_L 1
 #define type_R 2
-#define color_yu 155
+#define color_yu 120
 
 
 

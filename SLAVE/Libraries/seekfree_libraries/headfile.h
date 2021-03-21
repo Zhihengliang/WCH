@@ -91,4 +91,5 @@
 #include "camera_findline.h"
 #include "camera_special_ele.h"
 #include "image_run.h"
+#include"show_somthing.h"
 #endif

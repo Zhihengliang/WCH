@@ -178,7 +178,7 @@ extern int ring_lie_pos;
 extern int black_point_start;
 extern char line_lose_flag;
 
-extern char left_flag=0;
-extern char right_flag=0;
-extern char nomal_flag=0;
+extern char left_flag;
+extern char right_flag;
+extern char nomal_flag;
 #endif/* ___VARIABLE_H_ */

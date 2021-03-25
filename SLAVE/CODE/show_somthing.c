@@ -32,6 +32,7 @@ void show_page_3()//第三页
 {
     for(int i=0;i<MT9V03X_H;i++)
     {
+
         for(int j=0;j<MT9V03X_W;j++)
             {
                 if(mt9v03x_image[i][j]>color_yu)
@@ -42,6 +43,9 @@ void show_page_3()//第三页
                     lcd_drawpoint(j*TFT_X_MAX/MT9V03X_W,i,BLACK);
                 }
             }
+        lcd_drawpoint(centerline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,RED);
+        lcd_drawpoint(leftline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,GREEN);
+        lcd_drawpoint(rightline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,BLUE);
     }
 
 }
@@ -57,7 +61,18 @@ void show_page_5()//第五页
 
             for(int j=0;j<MT9V03X_W;j++)
                 {
-                    if(mt9v03x_image[i][j]>color_yu)
+                if((j<MT9V03X_W/2 && ((j+10)*TFT_X_MAX/MT9V03X_W)%(20*TFT_X_MAX/MT9V03X_W)==0)
+                        ||(j>MT9V03X_W/2 && ((MT9V03X_W-j+10)*TFT_X_MAX/MT9V03X_W)%(20*TFT_X_MAX/MT9V03X_W)==0) )
+                {
+                    lcd_drawpoint(j*TFT_X_MAX/MT9V03X_W,i,RED);
+                }
+                else if((j<MT9V03X_W/2 && (j*TFT_X_MAX/MT9V03X_W)%(20*TFT_X_MAX/MT9V03X_W)==0)
+                            ||(j>MT9V03X_W/2 && ((MT9V03X_W-j)*TFT_X_MAX/MT9V03X_W)%(20*TFT_X_MAX/MT9V03X_W)==0) ||
+                            MT9V03X_W/2*TFT_X_MAX/MT9V03X_W==j*TFT_X_MAX/MT9V03X_W)
+                    {
+                        lcd_drawpoint(j*TFT_X_MAX/MT9V03X_W,i,GRAY);
+                    }
+                    else if(mt9v03x_image[i][j]>color_yu)
                     {
                         lcd_drawpoint(j*TFT_X_MAX/MT9V03X_W,i,WHITE);
                     }
@@ -65,16 +80,56 @@ void show_page_5()//第五页
                         lcd_drawpoint(j*TFT_X_MAX/MT9V03X_W,i,BLACK);
                     }
                 }
-            lcd_drawpoint(centerline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,RED);
-            lcd_drawpoint(leftline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,GREEN);
-            lcd_drawpoint(rightline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,BLUE);
+            //lcd_drawpoint(centerline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,RED);
+            //lcd_drawpoint(leftline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,GREEN);
+            //lcd_drawpoint(rightline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,BLUE);
         }
 }
 void show_page_6()//第六页
 {
+    for(int i=0;i<MT9V03X_H;i++)
+    {
+        for(int j=0;j<MT9V03X_W;j++)
+        {
+            if(0==(MT9V03X_H-i+5)%10)
+            {
+                lcd_drawpoint(j*TFT_X_MAX/MT9V03X_W,i,GRAY);
+            }
+            else if(0==(MT9V03X_H-i)%10)
+            {
+                lcd_drawpoint(j*TFT_X_MAX/MT9V03X_W,i,RED);
+            }
+            else if(mt9v03x_image[i][j]>color_yu)
+            {
+                lcd_drawpoint(j*TFT_X_MAX/MT9V03X_W,i,WHITE);
+            }
+            else {
+                lcd_drawpoint(j*TFT_X_MAX/MT9V03X_W,i,BLACK);
+            }
+        }
 
+        lcd_drawpoint(centerline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,RED);
+        lcd_drawpoint(leftline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,GREEN);
+        lcd_drawpoint(rightline[MT9V03X_H-i-1]*TFT_X_MAX/MT9V03X_W,i,BLUE);
+    }
 }
 
+void show_page_7()//第七页
+{
+
+}
+void show_page_8()//第八页
+{
+
+}
+void show_page_9()//第九页
+{
+
+}
+void show_page_10()//第十页
+{
+
+}
 
 
 void show_page()
@@ -101,8 +156,19 @@ void show_page()
             break;
         case 6:
             show_page_6();
-
             break;
+        case 7:
+                    show_page_7();
+                    break;
+        case 8:
+                    show_page_8();
+                    break;
+        case 9:
+                    show_page_9();
+                    break;
+        case 10:
+                    show_page_10();
+                    break;
         default:
             now_show_page=1;
             break;
@@ -113,7 +179,7 @@ void show_page()
 
 void page_up()
 {
-    if(now_show_page < max_show_page )
+    if( now_show_page < MAX_SHOW_PAGE )
         now_show_page++;
 }
 

@@ -120,7 +120,6 @@ extern int slope_C;
 extern int slope_L;
 extern int slope_R;
 
-extern int Pixels[P_H][P_W];
 //    1、左线值：lefetline
 //    2、右线值：rightline
 //    3、中线值：centerline

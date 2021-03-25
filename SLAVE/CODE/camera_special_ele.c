@@ -60,6 +60,14 @@ void mode_recogn(char line_1,char line_2,char line_3)
     else if(curv_l==0&&curv_r==0)
     {
         nomal_flag=1;
+        right_flag=0;
+        left_flag=0;
+        Shi_zi_flag=0;
+    }
+    if(10<=times)
+    {
+        Shi_zi_flag=1;
+        nomal_flag=1;
     }
 }
 
@@ -71,16 +79,22 @@ void mode_recogn(char line_1,char line_2,char line_3)
 //-------------------------------------------------------------------------------------------------------------------
 void Mid_corr()
 {
+    ctrl_main();
+    mode_recogn(10,20,30);
     if(left_flag==1)
-    {
-        image_center(60,-20);
-    }
-    else if(right_flag)
     {
         image_center(60,20);
     }
+    else if(right_flag)
+    {
+        image_center(60,-10);
+    }
     else if(nomal_flag)
     {
-        image_center(60,0);
+        image_center(60,10);
+        if(Shi_zi_flag)
+        {
+            target_Wz=0;
+        }
     }
 }

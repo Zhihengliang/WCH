@@ -4,12 +4,12 @@
  *  Created on: 2021年3月19日
  *      Author: HP
  */
-#include <headfile.h>
-#include "camera_findline.h"
+
 #ifndef CODE_SHOW_SOMTHING_H_
 #define CODE_SHOW_SOMTHING_H_
-
-#define  max_show_page  6/*最大页面数*/
+#include <headfile.h>
+#include "camera_findline.h"
+#define   MAX_SHOW_PAGE  10/*最大页面数*/
 
 extern int8 now_show_page ;//当前页面
 extern int8 clear_page_flag  ;//清屏标志位

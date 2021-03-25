@@ -124,7 +124,7 @@ int main(void)
 
         if(1 == process_image_inMain_flage)
         {
-            image_center(90);
+            Mid_corr();
             process_image_inMain_flage=0;
         }
         if(1 == show_figure_inMain_flage)

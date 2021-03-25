@@ -80,7 +80,7 @@ int slope_C;
 int slope_L;
 int slope_R;
 
-int Pixels[P_H][P_W];
+//uint8 Pixels[P_H][P_W];
 //    1、左线值：lefetline
 //    2、右线值：rightline
 //    3、中线值：centerline
